@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicPlayer
+namespace _2.Brain_Layer
 {
-    class MusicPlayer
+    public class Player
     {
         [DllImport("winmm.dll")]
         private static extern long mciSendString (string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, int hwndCallback);

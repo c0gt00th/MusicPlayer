@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using _3.Interface_Layer;
 
-namespace MusicPlayer
+namespace _3.Interface_Layer
 {
     static class Program
     {
@@ -13,7 +12,7 @@ namespace MusicPlayer
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main ()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

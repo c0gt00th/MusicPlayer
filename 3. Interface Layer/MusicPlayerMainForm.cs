@@ -3,34 +3,31 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using _2.Brain_Layer;
 
-namespace MusicPlayer
+namespace _3.Interface_Layer
 {
-    public partial class formMain : Form
+    public partial class MusicPlayerMainForm : Form
     {
         private const string playingPrefix = "Playing: ";
-        private MusicPlayer player = new MusicPlayer();
-        private List<MusicFile> playlist;
+        private Player player = new Player();
 
-        public formMain()
+        public MusicPlayerMainForm()
         {
             InitializeComponent();
             Initialize();
         }
 
-        private void Initialize ()
+        private void Initialize()
         {
             labelCurrentSong.Text = playingPrefix;
-
-            playlist = new List<MusicFile>();
         }
 
-        private void UpdateCurrentSongLabel (string name)
+        private void UpdateCurrentSongLabel(string name)
         {
             labelCurrentSong.Text = playingPrefix + name;
         }
@@ -40,17 +37,13 @@ namespace MusicPlayer
         private void buttonOpen_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog();
-            playlist.Add(new MusicFile(openFileDialog1.FileName));
-
-            UpdateCurrentSongLabel(playlist[0].filename);
+            player.open(openFileDialog1.FileName);
+            UpdateCurrentSongLabel(openFileDialog1.FileName);
         }
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            foreach (var song in playlist) {
-                player.open(song.filepath);
-                player.play();
-            }
+            player.play();
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
