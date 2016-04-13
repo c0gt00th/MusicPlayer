@@ -13,7 +13,10 @@ namespace _3.Interface_Layer
 {
     public partial class MusicPlayerMainForm : Form
     {
+        #region String Constants
         private const string playingPrefix = "Playing: ";
+        #endregion
+
         private Player player = new Player();
 
         public MusicPlayerMainForm()
