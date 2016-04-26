@@ -9,14 +9,20 @@ namespace _1.Data_Layer.Models
 {
     class Song
     {
-        public string filepath { get; set; }
-        public string filename { get; set; }
-
-        public Song (string path)
+        private int id;
+        private string name;
+        private FileInfo info;
+        
+        public Song(string path)
         {
-            var info = new FileInfo(path);
-            filepath = info.FullName;
-            filename = info.Name;
+            info = new FileInfo(path);
+        }
+
+        public Song(int id, string name, string path)
+        {
+            this.id = id;
+            this.name = name;
+            info = new FileInfo(path);
         }
     }
 }

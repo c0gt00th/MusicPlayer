@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _1.Data_Layer
+namespace _2.Brain_Layer.ViewModels
 {
-    public class Class1
+    class SongVM
     {
     }
 }

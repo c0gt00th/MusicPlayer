@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2.Brain_Layer;
+using System.IO;
 
 namespace _3.Interface_Layer
 {
@@ -28,32 +29,47 @@ namespace _3.Interface_Layer
         private void Initialize()
         {
             labelCurrentSong.Text = playingPrefix;
+            btnPlay.Image = Properties.Resources.play;
         }
 
         private void UpdateCurrentSongLabel(string name)
         {
-            labelCurrentSong.Text = playingPrefix + name;
+            var info = new FileInfo(name);
+            labelCurrentSong.Text = playingPrefix + info.Name;
         }
 
         #region Form Events
-
-        private void buttonOpen_Click(object sender, EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog();
-            player.open(openFileDialog1.FileName);
+            player.CurrentFile = openFileDialog1.FileName;
             UpdateCurrentSongLabel(openFileDialog1.FileName);
         }
 
-        private void buttonPlay_Click(object sender, EventArgs e)
+        private void btnPlay_Click(object sender, EventArgs e)
         {
-            player.play();
+            player.Play();
+            SwapPlayPauseButtonImage();
         }
 
-        private void buttonStop_Click(object sender, EventArgs e)
+        private void btnStop_Click(object sender, EventArgs e)
         {
-            player.stop();
+            player.Stop();
+            btnPlay.Image = Properties.Resources.play;
         }
-
         #endregion
+
+        private void SwapPlayPauseButtonImage()
+        {
+            if (player.isPlaying)
+            {
+                btnPlay.Image = Properties.Resources.pause;
+            }
+
+            else
+            {
+                btnPlay.Image = Properties.Resources.play;
+            }
+        }
     }
 }

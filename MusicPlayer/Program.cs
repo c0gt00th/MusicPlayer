@@ -19,5 +19,7 @@ namespace MusicPlayer
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MusicPlayerMainForm());
         }
+
+        // TODO: Implement exception throwing pop-up
     }
 }

@@ -9,27 +9,59 @@ namespace _2.Brain_Layer
 {
     public class Player
     {
+        #region Private Variables
         [DllImport("winmm.dll")]
         private static extern long mciSendString (string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, int hwndCallback);
+        
+        #endregion
 
-        public void open (string file)
+        #region Public Variables
+        public string CurrentFile { get; set; }
+        public bool isPlaying;
+        #endregion
+
+        public Player ()
         {
-            string command = "open \"" + file + "\" type MPEGVideo alias MyMp3";
-            mciSendString(command, null, 0, 0);
+            
         }
 
-        public void play ()
+        public void Play()
         {
-            string command = "play MyMp3";
+            if (String.IsNullOrEmpty(CurrentFile))
+            {
+                throw new NotImplementedException();
+            }
+
+            string command;
+            command = "open \"" + CurrentFile + "\" type MPEGVideo alias file";
             mciSendString(command, null, 0, 0);
+
+            if (isPlaying)
+            {
+                command = "stop file";
+                mciSendString(command, null, 0, 0);
+            }
+
+            else
+            {
+                command = "play file";
+                mciSendString(command, null, 0, 0);
+            }
+
+            isPlaying = !isPlaying;
         }
 
-        public void stop ()
+        public void Stop()
         {
-            string command = "stop MyMp3";
+            if (isPlaying)
+            {
+                isPlaying = !isPlaying;
+            }
+
+            string command = "stop file";
             mciSendString(command, null, 0, 0);
 
-            command = "close MyMp3";
+            command = "close file";
             mciSendString(command, null, 0, 0);
         }
     }
