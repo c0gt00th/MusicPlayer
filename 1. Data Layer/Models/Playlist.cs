@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1.Data_Layer.Models
 {
-    class Playlist
+    public class Playlist
     {
         public List<Song> Songs { get; set; }
         public string Name { get; set; }

@@ -1,68 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using _2.Brain_Layer.ViewModels;
+using _3.Interface_Layer;
+using _4.MCI;
 
 namespace _2.Brain_Layer
 {
     public class Player
     {
         #region Private Variables
-        [DllImport("winmm.dll")]
-        private static extern long mciSendString (string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, int hwndCallback);
-        
-        #endregion
-
-        #region Public Variables
-        public string CurrentFile { get; set; }
-        public bool isPlaying;
+        private MusicPlayerMainForm mainForm;
+        private PlaylistVM currentPlaylist;
+        private SongVM currentSong;
+        private bool isPlaying;
         #endregion
 
         public Player ()
         {
-            
+            mainForm = new MusicPlayerMainForm();
+            currentPlaylist = new PlaylistVM();
+            isPlaying = false;
+            InitializeEvents();
+
+            mainForm.ShowDialog();
         }
 
-        public void Play()
+        private void InitializeEvents()
         {
-            if (String.IsNullOrEmpty(CurrentFile))
-            {
-                throw new NotImplementedException();
-            }
-
-            string command;
-            command = "open \"" + CurrentFile + "\" type MPEGVideo alias file";
-            mciSendString(command, null, 0, 0);
-
-            if (isPlaying)
-            {
-                command = "stop file";
-                mciSendString(command, null, 0, 0);
-            }
-
-            else
-            {
-                command = "play file";
-                mciSendString(command, null, 0, 0);
-            }
-
-            isPlaying = !isPlaying;
+            mainForm.OpenSong += mainForm_OpenSong;
+            mainForm.PlayPauseSong += mainForm_PlayPauseSong;
+            mainForm.StopSong += mainForm_StopSong;
         }
 
-        public void Stop()
+        #region Event Methods
+        private void mainForm_OpenSong(object sender, EventArgs e)
         {
-            if (isPlaying)
+            var result = mainForm.OpenNewSong();
+
+            if (result != null)
             {
-                isPlaying = !isPlaying;
+                currentPlaylist.AddSong(result);
+                currentPlaylist.SetCurrentSong();
+                currentSong = currentPlaylist.CurrentSong;
+
+                mainForm.UpdateCurrentSongLabel(currentPlaylist.CurrentSong.Name);
             }
+        }
 
-            string command = "stop file";
-            mciSendString(command, null, 0, 0);
+        private void mainForm_PlayPauseSong(object sender, EventArgs e)
+        {
+            if (currentSong != null)
+            {
+                try
+                {
+                    if (!isPlaying)
+                    {
+                        MCIController.SetCurrentSong(currentSong.Path);
+                        MCIController.PlayCurrentSong();
+                    }
 
-            command = "close file";
-            mciSendString(command, null, 0, 0);
+                    else
+                    {
+                        MCIController.PauseCurrentSong();
+                    }
+
+                    isPlaying = !isPlaying;
+                    mainForm.SwapPlayPauseButtonImage();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        private void mainForm_StopSong(object sender, EventArgs e)
+        {
+            isPlaying = false;
+            MCIController.StopCurrentSong();
+        }
+        #endregion
+
+        public void PlayRandom()
+        {
+
         }
     }
 }

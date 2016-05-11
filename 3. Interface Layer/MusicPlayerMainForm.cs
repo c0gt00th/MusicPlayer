@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using _2.Brain_Layer;
 using System.IO;
 
 namespace _3.Interface_Layer
@@ -16,9 +15,14 @@ namespace _3.Interface_Layer
     {
         #region String Constants
         private const string playingPrefix = "Playing: ";
+        private bool isPaused;
         #endregion
 
-        private Player player = new Player();
+        #region Events
+        public event EventHandler OpenSong;
+        public event EventHandler PlayPauseSong;
+        public event EventHandler StopSong;
+        #endregion
 
         public MusicPlayerMainForm()
         {
@@ -30,46 +34,71 @@ namespace _3.Interface_Layer
         {
             labelCurrentSong.Text = playingPrefix;
             btnPlay.Image = Properties.Resources.play;
+            isPaused = false;
         }
 
-        private void UpdateCurrentSongLabel(string name)
+        public void UpdateCurrentSongLabel(string name)
         {
-            var info = new FileInfo(name);
-            labelCurrentSong.Text = playingPrefix + info.Name;
+            labelCurrentSong.Text = playingPrefix + name;
         }
 
-        #region Form Events
+        #region Open
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            DialogResult result = openFileDialog1.ShowDialog();
-            player.CurrentFile = openFileDialog1.FileName;
-            UpdateCurrentSongLabel(openFileDialog1.FileName);
+            if (OpenSong != null)
+            {
+                OpenSong(sender, e);
+            }
         }
 
-        private void btnPlay_Click(object sender, EventArgs e)
+        public string OpenNewSong()
         {
-            player.Play();
-            SwapPlayPauseButtonImage();
-        }
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                return openFileDialog1.FileName;
+            }
 
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            player.Stop();
-            btnPlay.Image = Properties.Resources.play;
+            return null;
         }
         #endregion
 
-        private void SwapPlayPauseButtonImage()
+        #region Play
+        private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (player.isPlaying)
+            if (PlayPauseSong != null)
             {
-                btnPlay.Image = Properties.Resources.pause;
+                PlayPauseSong(sender, e);
+            }
+        }
+
+        public void SwapPlayPauseButtonImage()
+        {
+            if (isPaused)
+            {
+                btnPlay.Image = Properties.Resources.play;
             }
 
             else
             {
-                btnPlay.Image = Properties.Resources.play;
+                btnPlay.Image = Properties.Resources.pause;
             }
+
+            isPaused = !isPaused;
         }
+        #endregion
+
+        #region Stop
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            if (StopSong != null)
+            {
+                StopSong(sender, e);
+            }
+
+            btnPlay.Image = Properties.Resources.play;
+        }
+        #endregion
+
+        
     }
 }

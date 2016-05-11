@@ -7,21 +7,16 @@ using System.Threading.Tasks;
 
 namespace _1.Data_Layer.Models
 {
-    class Song
+    public class Song
     {
-        private int id;
-        private string name;
-        private FileInfo info;
-        
-        public Song(string path)
-        {
-            info = new FileInfo(path);
-        }
+        public int ID;
+        public string Name;
+        public FileInfo info;
 
         public Song(int id, string name, string path)
         {
-            this.id = id;
-            this.name = name;
+            ID = id;
+            Name = name;
             info = new FileInfo(path);
         }
     }

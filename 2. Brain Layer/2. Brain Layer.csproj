@@ -32,6 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +46,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PlaylistVM.cs" />
     <Compile Include="ViewModels\SongVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\1. Data Layer\1. Data Layer.csproj">
+      <Project>{36d1224c-52cb-46fb-91a0-716bc1a9d0a1}</Project>
+      <Name>1. Data Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3. Interface Layer\3. Interface Layer.csproj">
+      <Project>{1f22f5b8-027f-4b40-9c12-8f89973f41cb}</Project>
+      <Name>3. Interface Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\4. MCI\4. MCI.csproj">
+      <Project>{ab81c691-dfc3-4fcf-896c-9a2f3fb4b3cc}</Project>
+      <Name>4. MCI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

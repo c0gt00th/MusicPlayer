@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2. Brain Layer", "2. Brain 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3. Interface Layer", "3. Interface Layer\3. Interface Layer.csproj", "{1F22F5B8-027F-4B40-9C12-8F89973F41CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4. MCI", "4. MCI\4. MCI.csproj", "{AB81C691-DFC3-4FCF-896C-9A2F3FB4B3CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1F22F5B8-027F-4B40-9C12-8F89973F41CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F22F5B8-027F-4B40-9C12-8F89973F41CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F22F5B8-027F-4B40-9C12-8F89973F41CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB81C691-DFC3-4FCF-896C-9A2F3FB4B3CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB81C691-DFC3-4FCF-896C-9A2F3FB4B3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB81C691-DFC3-4FCF-896C-9A2F3FB4B3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB81C691-DFC3-4FCF-896C-9A2F3FB4B3CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

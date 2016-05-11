@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using _3.Interface_Layer;
+using _2.Brain_Layer;
+
 
 namespace MusicPlayer
 {
@@ -17,9 +18,8 @@ namespace MusicPlayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MusicPlayerMainForm());
-        }
 
-        // TODO: Implement exception throwing pop-up
+            Player player = new Player();
+        }
     }
 }

@@ -81,12 +81,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\2. Brain Layer\2. Brain Layer.csproj">
-      <Project>{be121e07-f0cf-4a50-b9e1-b7f0918ccaf7}</Project>
-      <Name>2. Brain Layer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\open.png" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +91,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\next.png" />
+    <Content Include="Resources\playlist.png" />
+    <Content Include="Resources\previous.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
